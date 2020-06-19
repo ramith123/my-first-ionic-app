@@ -39,6 +39,12 @@
             light
           </ion-button>
         </ion-col>
+
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="auto">
+          <ion-toggle [(ngModel)]="selected" (ngModelChange)="slide()"></ion-toggle>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </div>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { ThemeTestService } from '../theme-test.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -9,20 +10,30 @@ import { ThemeTestService } from '../theme-test.service';
 })
 export class HomePage {
 
-  constructor(private themeChanger: ThemeTestService,
+  selected = false;
+  constructor(private themeChanger: ThemeTestService, storage: Storage) {
+    storage.get("theme").then(theme => {
+      if (theme == "dark") this.selected = true;
+    })
+  }
 
-
-  ) { }
 
 
   darkMode() {
     this.themeChanger.setTheme("dark");
+    this.selected = true;
 
   }
 
   lightMode() {
     this.themeChanger.setTheme("light");
+    this.selected = false;
 
+  }
+  slide() {
+
+    if (this.selected) this.darkMode();
+    else this.lightMode();
   }
 
 }

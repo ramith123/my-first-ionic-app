@@ -3,6 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { CssSelector } from '@angular/compiler';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +15,7 @@ export class ThemeTestService {
   ) {
     store.get('css').then(css => {
       this.setCss(css);
+
     })
   }
 
@@ -26,14 +28,17 @@ export class ThemeTestService {
       css = getLightCss();
     }
 
-
+    this.store.set('theme', theme);
     this.store.set('css', css);
     this.setCss(css);
   }
   setCss(css: string) {
-    console.log(css);
+    // console.log(css);
     this.document.documentElement.style.cssText = css;
   }
+
+
+
 }
 
 function getDarkCss() {
@@ -71,8 +76,9 @@ function getDarkCss() {
 
   
 
-`;
+  `;
 }
+
 function getLightCss() {
   return ` 
   
